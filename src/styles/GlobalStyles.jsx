@@ -16,15 +16,6 @@ export const GlobalStyles = css`
     letter-spacing: 0.03em;
 
     background: ${theme.colors.bgMain};
-
-    overflow: auto;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-
-    ::-webkit-scrollbar {
-      width: 0;
-      height: 0;
-    }
   }
   h1,
   h2,

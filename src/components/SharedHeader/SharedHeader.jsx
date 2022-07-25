@@ -1,13 +1,25 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Suspense } from 'react';
+import { Outlet } from 'react-router-dom';
+import { Header, NavList, MainLink } from './SharedHeader.styled';
 
 export const SharedHeader = () => {
   return (
     <>
-      <nav>
-        <Link to="/">Home</Link>
-        <Link to="/movies">Movies</Link>
-      </nav>
-      <Outlet />
+      <Header>
+        <NavList>
+          <li>
+            <MainLink to="/">Home</MainLink>
+          </li>
+          <li>
+            <MainLink to="/movies">Movies</MainLink>
+          </li>
+        </NavList>
+      </Header>
+      <main>
+        <Suspense>
+          <Outlet />
+        </Suspense>
+      </main>
     </>
   );
 };
