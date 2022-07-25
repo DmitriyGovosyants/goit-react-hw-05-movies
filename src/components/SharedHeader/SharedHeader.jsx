@@ -16,7 +16,7 @@ export const SharedHeader = () => {
         </NavList>
       </Header>
       <main>
-        <Suspense>
+        <Suspense fallback={<div>Loading...</div>}>
           <Outlet />
         </Suspense>
       </main>
