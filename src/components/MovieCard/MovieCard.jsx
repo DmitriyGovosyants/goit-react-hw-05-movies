@@ -11,6 +11,7 @@ import {
 export const MovieCard = ({
   film: { poster_path, release_date, vote_average, genres, title, overview },
   movieId,
+  backFrom,
 }) => {
   const filmPoster = poster_path
     ? `https://image.tmdb.org/t/p/original${poster_path}`
@@ -45,12 +46,18 @@ export const MovieCard = ({
         <p>Additional information</p>
         <ul>
           <li>
-            <AdditionalLink to={`/movies/${movieId}/cast`}>
+            <AdditionalLink
+              to={`/movies/${movieId}/cast`}
+              state={{ from: backFrom.current }}
+            >
               - Cast -
             </AdditionalLink>
           </li>
           <li>
-            <AdditionalLink to={`/movies/${movieId}/reviews`}>
+            <AdditionalLink
+              to={`/movies/${movieId}/reviews`}
+              state={{ from: backFrom.current }}
+            >
               - Reviews -
             </AdditionalLink>
           </li>
@@ -70,4 +77,5 @@ MovieCard.propTypes = {
     overview: PropTypes.string.isRequired,
   }),
   movieId: PropTypes.string.isRequired,
+  backFrom: PropTypes.object.isRequired,
 };
