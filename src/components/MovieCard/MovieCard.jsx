@@ -69,7 +69,7 @@ export const MovieCard = ({
 
 MovieCard.propTypes = {
   film: PropTypes.shape({
-    poster_path: PropTypes.string.isRequired,
+    poster_path: PropTypes.string,
     release_date: PropTypes.string.isRequired,
     vote_average: PropTypes.number.isRequired,
     genres: PropTypes.array.isRequired,

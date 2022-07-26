@@ -1,5 +1,11 @@
 import { Suspense } from 'react';
-import { Link, useParams, Outlet, useLocation } from 'react-router-dom';
+import {
+  Link,
+  useParams,
+  Outlet,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import { IoArrowBackOutline } from 'react-icons/io5';
 import { fetchMovieDetails } from 'services/filmsApi';
@@ -10,6 +16,8 @@ const MovieDetails = () => {
   const [error, setError] = useState(null);
 
   const { movieId } = useParams();
+  const navigate = useNavigate();
+
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '/';
   const backFrom = useRef(backLinkHref);
@@ -18,14 +26,16 @@ const MovieDetails = () => {
     const fetch = async () => {
       try {
         const { data } = await fetchMovieDetails(movieId);
-
         setFilm(data);
       } catch (e) {
+        if (e.response.status === 404) {
+          navigate(`/`);
+        }
         setError(e.message);
       }
     };
     fetch();
-  }, [movieId]);
+  }, [movieId, navigate]);
 
   return (
     <>
