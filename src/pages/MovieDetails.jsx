@@ -29,7 +29,7 @@ const MovieDetails = () => {
         setFilm(data);
       } catch (e) {
         if (e.response.status === 404) {
-          navigate(`/`);
+          return navigate(`/`);
         }
         setError(e.message);
       }
