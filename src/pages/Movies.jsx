@@ -4,22 +4,16 @@ import { SearchForm, MovieLink } from 'components';
 import { fetchMoviesByName } from 'services/filmsApi';
 
 const Movies = () => {
-  const [search, setSearch] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [search, setSearch] = useState(searchParams.get('search') ?? '');
   const [films, setFilms] = useState([]);
   const [error, setError] = useState(null);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const query = searchParams.get('query');
-
-  useEffect(() => {
-    if (query) {
-      setSearch(query);
-    }
-  }, [query]);
 
   useEffect(() => {
     if (search === '') {
       return;
     }
+    setSearchParams({ search });
 
     const fetch = async () => {
       try {
@@ -33,19 +27,14 @@ const Movies = () => {
       }
     };
     fetch();
-  }, [search]);
-
-  const onSearch = value => {
-    setSearch(value);
-    setSearchParams({ query: value });
-  };
+  }, [search, setSearchParams]);
 
   return (
     <>
-      <SearchForm onSearch={onSearch} />
+      <SearchForm onSearch={setSearch} />
       {error && <p>{error}</p>}
       {films.map(({ title, id }) => {
-        return <MovieLink key={id} id={id} title={title} />;
+        return <MovieLink key={id} movieId={id} title={title} />;
       })}
     </>
   );

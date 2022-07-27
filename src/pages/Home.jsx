@@ -26,7 +26,7 @@ const Home = () => {
       <h1>Trending today</h1>
       {error && <p>{error}</p>}
       {films.map(({ title, id }) => {
-        return <MovieLink key={id} id={id} title={title} />;
+        return <MovieLink key={id} movieId={id} title={title} />;
       })}
     </>
   );

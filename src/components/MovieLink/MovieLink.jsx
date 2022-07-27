@@ -1,13 +1,15 @@
 import PropTypes from 'prop-types';
-import { useLocation } from 'react-router-dom';
+import { useLocation, generatePath } from 'react-router-dom';
+import { routesPath } from 'routerSettings/settings';
 import { LinkItem, LinkStyled } from './MovieLink.styled';
 
-export const MovieLink = ({ id, title }) => {
+export const MovieLink = ({ movieId, title }) => {
   const location = useLocation();
+  const movieLink = generatePath(routesPath.movieId, { movieId });
 
   return (
-    <LinkItem key={id}>
-      <LinkStyled to={`/movies/${id}`} state={{ from: location }}>
+    <LinkItem key={movieId}>
+      <LinkStyled to={movieLink} state={{ from: location }}>
         {title}
       </LinkStyled>
     </LinkItem>
@@ -16,5 +18,5 @@ export const MovieLink = ({ id, title }) => {
 
 MovieLink.propTypes = {
   title: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
+  movieId: PropTypes.number.isRequired,
 };

@@ -4,7 +4,7 @@ import { fetchMovieReviews } from 'services/filmsApi';
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoad, setIsLoad] = useState(false);
   const [error, setError] = useState(null);
   const { movieId } = useParams();
 
@@ -16,7 +16,7 @@ const Reviews = () => {
         } = await fetchMovieReviews(movieId);
 
         setReviews(results);
-        setIsLoading(true);
+        setIsLoad(true);
       } catch (e) {
         setError(e.message);
       }
@@ -24,7 +24,7 @@ const Reviews = () => {
     fetch();
   }, [movieId]);
 
-  const noReviews = reviews.length === 0 && isLoading;
+  const noReviews = reviews.length === 0 && isLoad;
 
   return (
     <>

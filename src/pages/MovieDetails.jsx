@@ -23,6 +23,9 @@ const MovieDetails = () => {
   const backFrom = useRef(backLinkHref);
 
   useEffect(() => {
+    if (movieId === '') {
+      return;
+    }
     const fetch = async () => {
       try {
         const { data } = await fetchMovieDetails(movieId);
